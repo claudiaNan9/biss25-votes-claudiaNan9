@@ -1,12 +1,13 @@
 // Express is a simple framework for building a Restful API
 const express = require("express");
 const app = express();
+const port = process.env.PORT || 3000;
 
 
 // this creates a middleware that takes the data and if it is in json
 // it makes you read the body of the request
 app.use(express.json());
-
+app.use("/",express.static("./public")) ;
 
 
 
@@ -14,12 +15,6 @@ app.use(express.json());
 // It is called callback
 app.get("/",(request,response) => {
     response.send("Hello World!");
-});
-
-
-// It starts the server, returns a message to confirm it's running
-app.listen(3000,() => {
-    console.log("Server is running on port 3000!");
 });
 
 // We need to structure the Votes and Talks project, which is: 
@@ -111,4 +106,9 @@ app.get("/api/v1/talks/:talkId/votes/results", (request, response) => {
         response.send(results);
     }
  
+});
+
+// It starts the server, returns a message to confirm it's running
+app.listen(port,() => {
+    console.log("Server is running on port" +port);
 });
